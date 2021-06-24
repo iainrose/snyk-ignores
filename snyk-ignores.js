@@ -14,6 +14,4 @@ async function getIgnores(org, project) {
     return response.data;
 }
 
-getIgnores(org, project).then(ignores);
-
-console.log(ignores);
+getIgnores(org, project).then(console.log)
