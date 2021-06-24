@@ -1,0 +1,15 @@
+{
+  "name": "snyk-ignores",
+  "version": "1.0.0",
+  "description": "Queries snyk API for issue ignores and creates the .snyk policy file",
+  "main": "snyk-ignores.mjs",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
