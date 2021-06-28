@@ -1,17 +1,19 @@
 import axios from 'axios';
+import minimist from 'minimist';
+
+var args = minimist(process.argv.slice(2));
 
 const config = {
     baseURL: 'https://snyk.io/api/v1',
-    headers: {'Authorization': 'token 34ff4fc8-edff-4b66-af42-f7fa198269f9'}
+    headers: {'Authorization': 'token '+process.env.SNYK_TOKEN}
 }
 
-const org = '86ecb770-4611-47bf-8caa-4a7ef9a1ea31'
-const project = 'accd6203-f06a-4c70-8c48-a6f7beb7f929'
+const org = args['org']
+const project = args['project']
 
 const ignores = (await axios.get(`/org/${org}/project/${project}/ignores`, config)).data
 
 const issues = Object.keys(ignores)
-console.log(issues)
 
 var snykIgnore = `# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
 version: v1.14.0
@@ -24,18 +26,12 @@ issues.forEach(issue => {
 
     // Path
     var path = Object.keys(ignores[issue][0])
-    if (path == '*') {
-        var pathString = `'*'`
-    } else
-    {
-        pathString = path
-    }
+    if (path == '*') {var pathString = `'*'`} 
+    else {pathString = path}
 
     // Reason
     var reason = ignores[issue][0][path].reason
-    if(reason == '') {
-        reason = 'None given'
-    }
+    if(reason == '') {reason = 'None given'}
 
     // Expires
     var expires = ignores[issue][0][path].expires
@@ -44,7 +40,7 @@ issues.forEach(issue => {
     - ${pathString} :
       reason: '${reason}'
       expires: '${expires}'
-      `
+`
 })
 
 console.log(snykIgnore);

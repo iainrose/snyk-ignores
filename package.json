@@ -4,12 +4,22 @@
   "description": "Queries snyk API for issue ignores and creates the .snyk policy file",
   "main": "snyk-ignores.mjs",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "minimist": "^1.2.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iainrose/snyk-ignores.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/iainrose/snyk-ignores/issues"
+  },
+  "homepage": "https://github.com/iainrose/snyk-ignores#readme"
 }
