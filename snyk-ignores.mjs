@@ -1,8 +1,10 @@
 import axios from 'axios';
 import minimist from 'minimist';
+import { writeFile } from 'fs';
 
 // Get arguments
 var args = minimist(process.argv.slice(2));
+
 
 // Config for Axios
 const config = {
@@ -44,3 +46,8 @@ issues.forEach(issue => {
 })
 
 console.log(snykIgnore);
+
+writeFile('.snyk', snykIgnore, (err) => {
+    if (err) throw err;
+    console.log('The Snyk policy file has been saved!');
+  });
